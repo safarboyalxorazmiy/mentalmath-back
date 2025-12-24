@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  address: localhost
+  port: 8080
+  servlet:
+    context-path: /
+
+  # Add error handling configuration
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+  # Tomcat specific configurations to handle SSL misdirection
+  tomcat:
+    remoteip:
+      remote-ip-header: x-forwarded-for
+      protocol-header: x-forwarded-proto
+    # Reject SSL handshake attempts on non-SSL port
+    connection-timeout: 20000
+    max-http-header-size: 8192
+
