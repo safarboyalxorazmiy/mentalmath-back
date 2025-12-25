@@ -14,7 +14,10 @@ import uz.mentalmath.repository.UserRepository;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class SessionService {
@@ -186,21 +189,35 @@ public class SessionService {
         
         return toProblemResponse(nextProblem, session.getSessionType());
     }
-    
+
     private ProblemResponse toProblemResponse(Problem problem, SessionType sessionType) {
         List<String> operations = null;
+
         if (sessionType == SessionType.SEQUENTIAL) {
-            // Ifodani operatsiyalarga ajratish
-            String expr = problem.getExpression();
-            operations = List.of(expr.split(" "));
+            String expr = problem.getExpression().replaceAll("\\s+", "");
+
+            operations = new ArrayList<>();
+
+            // first number
+            Matcher first = Pattern.compile("^\\d+").matcher(expr);
+            if (first.find()) {
+                operations.add(first.group());
+            }
+
+            // +number or -number
+            Matcher rest = Pattern.compile("[+-]\\d+").matcher(expr);
+            while (rest.find()) {
+                operations.add(rest.group());
+            }
         }
-        
+
         return new ProblemResponse(
-            problem.getId(),
-            problem.getExpression(),
-            operations,
-            problem.getProblemOrder(),
-            PROBLEMS_PER_SESSION
+                problem.getId(),
+                problem.getExpression(),
+                operations,
+                problem.getProblemOrder(),
+                PROBLEMS_PER_SESSION
         );
     }
+
 }
