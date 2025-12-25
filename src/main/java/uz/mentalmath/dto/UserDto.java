@@ -79,7 +79,7 @@ public class UserDto {
             Integer longestStreak,
             Integer correctAnswers,
             Integer wrongAnswers,
-            Long totalPracticeTimeSeconds,
+            String totalPracticeTime,
             LocalDateTime lastPracticeAt
     ) {}
 }

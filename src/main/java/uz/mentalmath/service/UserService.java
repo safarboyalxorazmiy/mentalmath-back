@@ -182,7 +182,7 @@ public class UserService {
                     user.getLongestStreak(),
                     user.getCorrectAnswers(),
                     user.getWrongAnswers(),
-                    user.getTotalPracticeTimeSeconds(),
+                    formatDuration(user.getTotalPracticeTimeSeconds()),
                     user.getLastPracticeAt()
             ));
         }
