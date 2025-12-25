@@ -76,6 +76,10 @@ public class UserDto {
             Long totalXp,
             Integer totalProblems,
             double accuracy,
-            Integer longestStreak
+            Integer longestStreak,
+            Integer correctAnswers,
+            Integer wrongAnswers,
+            Long totalPracticeTimeSeconds,
+            LocalDateTime lastPracticeAt
     ) {}
 }

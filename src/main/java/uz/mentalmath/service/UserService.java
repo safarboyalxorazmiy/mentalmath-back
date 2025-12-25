@@ -179,7 +179,11 @@ public class UserService {
                     user.getTotalXp(),
                     user.getTotalProblems(),
                     accuracy,
-                    user.getLongestStreak()
+                    user.getLongestStreak(),
+                    user.getCorrectAnswers(),
+                    user.getWrongAnswers(),
+                    user.getTotalPracticeTimeSeconds(),
+                    user.getLastPracticeAt()
             ));
         }
 
